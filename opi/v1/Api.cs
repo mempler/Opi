@@ -42,7 +42,7 @@ namespace opi.v1
         public File GetReplay(PlayMode mode, int beatmapId, int userId) =>
             GetReplayAsync(mode, beatmapId, userId).GetAwaiter().GetResult();
         #endregion
-        
+
         #region ASYNC
         public async Task<Beatmap> GetBeatmapAsync(int beatmapId = -1, PlayMode mode = PlayMode.All,
             bool convertedMaps = false, string beatmapMd5 = "", int limit = 500)
@@ -58,7 +58,7 @@ namespace opi.v1
                 case PlayMode.Taiko:
                 case PlayMode.Ctb:
                 case PlayMode.Mania:
-                    queryString += $"&m={(int) mode}";
+                    queryString += $"&m={(int)mode}";
                     break;
             }
 
@@ -91,7 +91,7 @@ namespace opi.v1
                 case PlayMode.Taiko:
                 case PlayMode.Ctb:
                 case PlayMode.Mania:
-                    queryString += $"&m={(int) mode}";
+                    queryString += $"&m={(int)mode}";
                     break;
             }
 
@@ -117,7 +117,7 @@ namespace opi.v1
             if (mode == PlayMode.All)
                 throw new ArgumentException("PlayMode can not be set to All for Users");
 
-            string queryString = $"?k={ApiKey}&u={userId}&m={(int) mode}&type=id&event_days={eventDays}";
+            string queryString = $"?k={ApiKey}&u={userId}&m={(int)mode}&type=id&event_days={eventDays}";
             string result = await Task.Run(() =>
             {
                 using (WebClient client = new WebClient())
@@ -134,7 +134,7 @@ namespace opi.v1
             if (mode == PlayMode.All)
                 throw new ArgumentException("PlayMode can not be set to All for Users");
 
-            string queryString = $"?k={ApiKey}&u={userName}&m={(int) mode}&type=string&event_days={eventDays}";
+            string queryString = $"?k={ApiKey}&u={userName}&m={(int)mode}&type=string&event_days={eventDays}";
             string result = await Task.Run(() =>
             {
                 using (WebClient client = new WebClient())
@@ -273,7 +273,7 @@ namespace opi.v1
                 throw new ArgumentException();
             if (userId <= 0)
                 throw new ArgumentException();
-            
+
             string queryString = $"?k={ApiKey}&m={(int)mode}&b={beatmapId}&u={userId}";
 
             string result = await Task.Run(() =>
@@ -306,7 +306,7 @@ namespace opi.v1
     {
         [JsonProperty("content")]
         public string Content;
-        
+
         [JsonProperty("encoding")]
         public string Encoding;
     }
@@ -555,9 +555,11 @@ namespace opi.v1
         [JsonProperty("playcount")] public int PlayCount;
 
         [JsonProperty("passcount")] public int PassCount;
+
+        [JsonProperty("max_combo")] public int MaxCombo;
     }
     #endregion
-    
+
     #region ENUMS
     public enum Team
     {
